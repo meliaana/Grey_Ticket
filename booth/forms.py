@@ -1,5 +1,6 @@
 from django import forms
 from .models import Ticket, Order
+from user.models import User
 
 
 class TicketForm(forms.ModelForm):
@@ -14,7 +15,7 @@ class TicketForm(forms.ModelForm):
 
 
 class OrderForm(forms.ModelForm):
-    user = forms.ModelChoiceField(queryset=Order.objects.all())
+    user = forms.ModelChoiceField(queryset=User.objects.all())
     ticket = forms.ModelChoiceField(queryset=Ticket.objects.all())
 
     class Meta:
