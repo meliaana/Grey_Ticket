@@ -10,10 +10,8 @@ def add_ticket(request):
 
     if request.method == 'POST':
         form = TicketForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
             form.save()
-            print('saved')
             messages.success(request, f'success')
 
     return render(request, 'add-ticket.html', {'form': form})
@@ -22,10 +20,8 @@ def add_ticket(request):
 def add_order(request):
     form = OrderForm()
 
-    print(request.method)
     if request.method == 'POST':
         form = OrderForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
             form.save()
             messages.success(request, f'success')
