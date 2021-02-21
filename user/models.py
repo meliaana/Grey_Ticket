@@ -35,6 +35,10 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
+    first_name = models.CharField(max_length=255, default="", verbose_name=_('name'))
+    last_name = models.CharField(max_length=255, default="", verbose_name=_('surname'))
+    phone_number = models.CharField(max_length=255, default="", verbose_name=_('Phone number'))
+    balance = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -120,3 +120,6 @@ STATIC_URL = '/static/'
 STATIC_ROOt = os.path.join(BASE_DIR, 'static')
 
 AUTH_USER_MODEL = 'user.User'
+
+LOGIN_REDIRECT_URL = 'profile'
+LOGIN_URL = 'login'

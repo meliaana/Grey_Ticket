@@ -12,7 +12,7 @@ def add_ticket(request):
         form = TicketForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'success')
+            #messages.success(request, f'success')
 
     return render(request, 'add-ticket.html', {'form': form})
 
@@ -24,6 +24,6 @@ def add_order(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'success')
+            #messages.success(request, f'success')
 
     return render(request, 'order.html', {'form': form})

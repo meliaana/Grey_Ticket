@@ -1,13 +1,10 @@
 import uuid
 
-from six import text_type
-
 from django.db import models
 
 
 class Ticket(models.Model):
-    #@TODO: unique=True
-    code = models.CharField(max_length=255)
+    code = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
@@ -28,3 +25,6 @@ class Ticket(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(to='user.User', on_delete=models.CASCADE, related_name='order')
     ticket = models.OneToOneField(to='Ticket', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user}-{self.ticket}'

@@ -5,8 +5,8 @@ from user.models import User
 
 class TicketForm(forms.ModelForm):
     name = forms.CharField(max_length=255)
-    start_date = forms.DateTimeField()
-    end_date = forms.DateTimeField()
+    start_date = forms.DateTimeField(widget=forms.TextInput(attrs={'type': 'datetime-local'}))
+    end_date = forms.DateTimeField(widget=forms.TextInput(attrs={'type': 'datetime-local'}))
     price = forms.DecimalField()
 
     class Meta:

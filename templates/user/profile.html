@@ -1,10 +1,23 @@
-<!DOCTYPE html>
+{% extends "base.html"%}
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<h1>Profile</h1>
+{% block content%}
+<ul>
+    <li style="font-size:30px">Name: {{ user.get_full_name }}</li>
+    <li style="font-size:30px">Phone Number: {{ user.phone_number }}</li>
+    <li style="font-size:30px">Balance: {{ user.balance }}</li>
+</ul>
+
+
+{% endblock content %}
+
 
 </body>
 </html>
