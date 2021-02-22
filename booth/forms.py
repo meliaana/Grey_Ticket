@@ -14,10 +14,7 @@ class TicketForm(forms.ModelForm):
         fields = ['name', 'start_date', 'end_date', 'price']
 
 
-class OrderForm(forms.ModelForm):
+class OrderForm(forms.Form):
     user = forms.ModelChoiceField(queryset=User.objects.all())
     ticket = forms.ModelChoiceField(queryset=Ticket.objects.all())
 
-    class Meta:
-        model = Order
-        fields = ['user', 'ticket', ]
