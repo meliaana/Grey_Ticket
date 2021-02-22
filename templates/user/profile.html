@@ -4,16 +4,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Profile</title>
 </head>
 <body>
 <h1>Profile</h1>
 {% block content%}
 <ul>
-    <li style="font-size:30px">Name: {{ user.get_full_name }}</li>
+    <li style="font-size:30px">Name: {{user.get_full_name}}</li>
     <li style="font-size:30px">Phone Number: {{ user.phone_number }}</li>
-    <li style="font-size:30px">Balance: {{ user.balance }}</li>
-</ul>
+    <li style="font-size:30px">Balance: {{ user.balance }}
+
+    <a class="ml-2" href="{% url 'add-balance' %}">+</a> </li>
+    </ul>
+        {% for order in orders %}
+        <ul>
+        <li style="font-size:30px">
+             <a class="ml-2" href="{% url 'ticket-detail' order.ticket.pk %}">{{ order}} </a>
+        </li>
+    </ul>
+    {% endfor %}
 
 
 {% endblock content %}

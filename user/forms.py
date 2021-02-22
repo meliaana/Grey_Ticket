@@ -27,10 +27,11 @@ class UserRegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=255)
     last_name = forms.CharField(max_length=255)
     phone_number = forms.CharField(max_length=255)
+    staff = forms.BooleanField(required=True, label='Staff Member')
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'phone_number', 'password1', 'password2', ]
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'password1', 'password2', 'staff', ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -64,3 +65,5 @@ class UserRegisterForm(UserCreationForm):
         return user
 
 
+class BalanceForm(forms.Form):
+    balance = forms.DecimalField(max_digits=6,decimal_places=2)

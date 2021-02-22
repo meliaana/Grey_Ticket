@@ -39,6 +39,7 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=255, default="", verbose_name=_('surname'))
     phone_number = models.CharField(max_length=255, default="", verbose_name=_('Phone number'))
     balance = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
