@@ -25,6 +25,11 @@ class Ticket(models.Model):
 class Order(models.Model):
     user = models.ForeignKey(to='user.User', on_delete=models.CASCADE, related_name='order')
     ticket = models.OneToOneField(to='Ticket', on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+
+    def save(self, *args, **kwargs):
+        self.price = self.ticket.price
+        return super(Order, self).save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.ticket}'
