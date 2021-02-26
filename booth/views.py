@@ -29,7 +29,7 @@ class AddTicketVIew(FormView):
 
 class AddOrderView(LoginRequiredMixin, FormView):
     form_class = OrderForm
-    template_name = 'order.html'
+    template_name = 'add-order.html'
 
     def post(self, request, *args, **kwargs):
         form = OrderForm(request.POST)
