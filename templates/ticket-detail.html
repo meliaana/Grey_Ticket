@@ -1,21 +1,29 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Ticket</title>
 </head>
 <body>
-{{ ticket.name }}
-{{ ticket.start_date }}
-{{ ticket.end_date }}
-{{ ticket.price }}
+{% block content %}
+
+<ul>
+    <li>{{ ticket.name }}</li>
+<li>{{ ticket.start_date }}</li>
+<li>{{ ticket.end_date }}</li>
+<li>{{ ticket.price }}</li>
+<li>{{ ticket.code }}</li>
+
+</ul>
+
+
 <form method="POST">
             {% csrf_token %}
-
             <div class="form-group">
                  <button class="btn btn-outline-info" type="submit">Buy</button>
             </div>
         </form>
-
+{% endblock content %}
 </body>
 </html>

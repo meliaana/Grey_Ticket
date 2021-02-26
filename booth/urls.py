@@ -1,10 +1,10 @@
 from django.urls import path
 
-from booth.views import add_ticket, add_order, tickets_list_view, ticket_detail_view
+from booth.views import AddTicketVIew, AddOrderView, ticket_detail_view, TicketListView
 
 urlpatterns = [
-    path('ticket/', add_ticket, name='add-ticket'),
-    path('order/', add_order, name='add-order'),
+    path('ticket/', AddTicketVIew.as_view(), name='add-ticket'),
+    path('order/', AddOrderView.as_view(), name='add-order'),
     path('ticket-detail/<int:pk>/', ticket_detail_view, name='ticket-detail'),
-    path('', tickets_list_view, name='all-tickets')
+    path('', TicketListView.as_view(), name='all-tickets')
 ]

@@ -88,7 +88,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <div class="container">
 
-    {% for ticket in page_obj %}
+    {% for ticket in object_list %}
         {% if forloop.counter0|divisibleby:4 %}
             <div class="row">
         {% endif %}

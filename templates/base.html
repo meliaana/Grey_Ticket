@@ -19,7 +19,7 @@
        <ul class="right hide-on-med-and-down">
 
            {% if user.is_authenticated %}
-               <li>{{ user.balance }}</li>
+               <li><a href={% url 'add-balance' %}>{{ user.balance }}</a></li>
                <li><a href={% url 'profile' %}>Profile</a></li>
                 <li><a href={% url 'logout' %}>Logout</a></li>
            {% else %}
@@ -44,10 +44,6 @@
 {% block content %}
 {% endblock %}
 
-<script src="{% static 'js/header-responsive.js' %}"></script>
 </body>
-
-
-
 
 </html>

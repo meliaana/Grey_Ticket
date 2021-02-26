@@ -27,4 +27,4 @@ class Order(models.Model):
     ticket = models.OneToOneField(to='Ticket', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.user}-{self.ticket}'
+        return f'{self.ticket}'

@@ -1,6 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.http import HttpResponse
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView, DetailView, FormView
+
 from .models import Ticket, Order
 
 from django.shortcuts import render, redirect
@@ -8,47 +13,35 @@ from django.shortcuts import render, redirect
 from booth.forms import TicketForm, OrderForm
 
 
-def add_ticket(request):
-    form = TicketForm()
+class AddTicketVIew(FormView):
+    form_class = TicketForm
+    template_name = 'add-ticket.html'
 
-    if request.method == 'POST':
+    def post(self, request, *args, **kwargs):
         form = TicketForm(request.POST)
+
         if form.is_valid():
             form.save()
             # messages.success(request, f'success')
 
-    return render(request, 'add-ticket.html', {'form': form})
+        return HttpResponse('Ticket has been added ')
 
 
-@login_required
-def add_order(request):
-    form = OrderForm()
+class AddOrderView(LoginRequiredMixin, FormView):
+    form_class = OrderForm
+    template_name = 'order.html'
 
-    if request.method == 'POST':
+    def post(self, request, *args, **kwargs):
         form = OrderForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, f'success')
 
-    return render(request, 'order.html', {'form': form})
 
-
-def tickets_list_view(request):
-    tickets = Ticket.objects.all()
-
-    paginator = Paginator(tickets, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    return render(
-        request,
-        "tickets-listing.html",
-        context={
-            'tickets': tickets,
-            'page_obj': page_obj,
-        },
-
-    )
+class TicketListView(ListView):
+    model = Ticket
+    template_name = "tickets-listing.html"
+    paginate_by = 2
 
 
 def ticket_detail_view(request, pk):

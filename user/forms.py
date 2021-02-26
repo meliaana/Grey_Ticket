@@ -27,11 +27,10 @@ class UserRegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=255)
     last_name = forms.CharField(max_length=255)
     phone_number = forms.CharField(max_length=255)
-    staff = forms.BooleanField(required=True, label='Staff Member')
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'phone_number', 'password1', 'password2', 'staff', ]
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'password1', 'password2', ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -1,6 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum, Q
 from django.shortcuts import render, redirect
+from datetime import datetime
+
+from django.views.generic import FormView
 
 from booth.models import Order
 from .forms import UserRegisterForm, BalanceForm
@@ -22,21 +27,24 @@ def register(request):
 
 @login_required()
 def profile(request):
-    orders = Order.objects.filter(user=request.user)
+    user = request.user
+    orders = Order.objects.filter(user=user)
+
+    month = datetime.now().month
+    year = datetime.now().year
 
     return render(request, "user/profile.html", context={'orders': orders})
 
 
-@login_required
-def add_balance(request):
-    form = BalanceForm
+class AddBalanceView(LoginRequiredMixin, FormView):
+    form_class = BalanceForm
+    template_name = 'user/add-balance.html'
 
-    if request.method == 'POST':
+    def post(self, request, *args, **kwargs):
         form = BalanceForm(request.POST)
         if form.is_valid():
             user = request.user
-            user.balance = form.cleaned_data.get("balance")
+            user.balance += form.cleaned_data.get("balance")
             user.save()
             return redirect('profile')
 
-    return render(request, template_name='user/add-balance.html', context={'form': form})
